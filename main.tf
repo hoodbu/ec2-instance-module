@@ -99,7 +99,7 @@ output "Public_IP" {
 
 data "aws_network_interface" "aws_ubu_1" {
   provider = aws.west
-  id       = moduleaws_ubu_1.primary_network_interface_id
+  id       = module.aws_ubu_1.primary_network_interface_id
 }
   
 # private_ip = data.aws_network_interface.aws_ubu_1.private_ip
