@@ -65,7 +65,7 @@ module "my-vpc" {
 module "security_group_1" {
   source              = "terraform-aws-modules/security-group/aws"
   version             = "~> 3.0"
-  name                = "sg-ubu"
+  name                = "Ubuntu Security Group"
   description         = "Security group for example usage with EC2 instance"
   vpc_id              = module.my-vpc.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
