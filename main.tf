@@ -46,6 +46,9 @@ module "my-vpc" {
   tags = {
     Name = "2021-09"
   }
+  providers = {
+    aws = aws.west
+  }
 }
 
 module "security_group_1" {
