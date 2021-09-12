@@ -5,7 +5,3 @@ variable "controller_ip" {
 variable "EW1_ec2_key_name" {
   default = "ace-cloud-ops"
 }
-
-variable "ace_password" {
-  type = string
-}
