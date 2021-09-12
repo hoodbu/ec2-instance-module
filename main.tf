@@ -72,7 +72,7 @@ module "aws_ubu_1" {
   ami                         = data.aws_ami.ubuntu.id
   key_name                    = var.ec2_key_name
   # subnet_id                   = module.my-vpc.public_subnets[0].subnet_id
-  subnet_id                   = element(module.vpc.private_subnets, 0)
+  subnet_id                   = element(module.my-vpc.private_subnets, 0)
   vpc_security_group_ids      = [module.security_group_1.this_security_group_id]
   associate_public_ip_address = true
   user_data_base64            = base64encode(local.ubu_user_data)
