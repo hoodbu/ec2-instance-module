@@ -47,9 +47,9 @@ module "my-vpc" {
   name = "my-vpc"
   cidr = "10.222.0.0/16"
 
-  azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-  private_subnets = ["10.222.1.0/24", "10.222.2.0/24", "10.222.3.0/24"]
-  public_subnets  = ["10.222.101.0/24", "10.222.102.0/24", "10.222.103.0/24"]
+  azs             = ["eu-west-1a", "eu-west-1b"]
+  private_subnets = ["10.222.1.0/24", "10.222.2.0/24"]
+  public_subnets  = ["10.222.101.0/24", "10.222.102.0/24"]
 
   enable_nat_gateway = false
   enable_vpn_gateway = false
