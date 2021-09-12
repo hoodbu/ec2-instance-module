@@ -67,7 +67,7 @@ module "aws_ubu_1" {
   instance_type               = "t3.micro"
   name                        = "AWS-ubu"
   ami                         = data.aws_ami.ubuntu.id
-  key_name                    = var.EW1_ec2_key_name
+  key_name                    = var.ec2_key_name
   subnet_id                   = module.my-vpc.public_subnets[0].subnet_id
   vpc_security_group_ids      = [module.security_group_1.this_security_group_id]
   associate_public_ip_address = true
