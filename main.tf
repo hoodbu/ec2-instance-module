@@ -91,7 +91,11 @@ module "aws_ubu_1" {
   }
 }
 
-/*
+output "Public_IP" {
+  value = module.aws_ubu_1.public_ip
+}
+  
+  /*
 data "aws_network_interface" "ace-onprem-ubu-ni" {
   id = output.primary_network_interface_id
 }
