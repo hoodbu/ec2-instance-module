@@ -97,9 +97,9 @@ output "Public_IP" {
 
 ### Code below needs to output Private IP.
 
-/* 
 data "aws_network_interface" "aws_ubu_1" {
-  id = output.primary_network_interface_id
+  provider = aws.west
+  id       = moduleaws_ubu_1.primary_network_interface_id
 }
   
 # private_ip = data.aws_network_interface.aws_ubu_1.private_ip
@@ -107,5 +107,3 @@ data "aws_network_interface" "aws_ubu_1" {
 output "Private_IP" {
   value = data.aws_network_interface.aws_ubu_1.private_ip
 }
- 
-*/
