@@ -48,8 +48,8 @@ module "my-vpc" {
   cidr = "10.222.0.0/16"
 
   azs             = ["eu-west-1a", "eu-west-1b"]
-  private_subnets = ["10.222.1.0/24", "10.222.2.0/24"]
-  public_subnets  = ["10.222.101.0/24", "10.222.102.0/24"]
+  private_subnets = ["10.222.1.0/24"]
+  public_subnets  = ["10.222.101.0/24"]
 
   enable_nat_gateway = false
   enable_vpn_gateway = false
@@ -95,16 +95,13 @@ output "Public_IP" {
   value = module.aws_ubu_1.public_ip
 }
 
-output "Private_IP" {
-  value = module.aws_ubu_1.private_ip
-}
-
-  /*
-data "aws_network_interface" "ace-onprem-ubu-ni" {
+data "aws_network_interface" "aws_ubu_1" {
   id = output.primary_network_interface_id
 }
+  
+# private_ip = data.aws_network_interface.aws_ubu_1.private_ip
 
-# private_ip = data.aws_network_interface.ace-onprem-ubu-ni.private_ip
-
-*/
-      
+output "Private_IP" {
+  value = data.aws_network_interface.aws_ubu_1.private_ip
+}
+ 
