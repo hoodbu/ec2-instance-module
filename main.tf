@@ -1,3 +1,14 @@
+resource "tls_private_key" "avtx_key" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
+}
+
+resource "aws_key_pair" "aws_west1_key" {
+  provider   = aws.west
+  key_name   = var.ec2_key_name
+  public_key = tls_private_key.avtx_key.public_key_openssh
+}
+
 ##################################################################
 # Data source to get AMI details
 ##################################################################
