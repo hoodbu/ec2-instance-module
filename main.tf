@@ -101,7 +101,7 @@ data "aws_network_interface" "aws_ubu_1" {
   
 private_ip = data.aws_network_interface.aws_ubu_1.private_ip
 
-output "Private_IP" {
+/* output "Private_IP" {
   value = private_ip
-}
+}*/
  
