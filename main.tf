@@ -26,21 +26,13 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-locals {
-  ubu_user_data = <<EOF
-#!/bin/bash
-sudo hostnamectl set-hostname "Ubuntu"
-sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-sudo echo 'ubuntu:Prosim0123!' | /usr/sbin/chpasswd
-sudo apt update -y
-sudo apt upgrade -y
-sudo apt-get -y install traceroute unzip build-essential git gcc hping3 apache2 net-tools
-sudo apt autoremove
-sudo /etc/init.d/ssh restart
-sudo echo "<html><h1>Prosimo is awesome</h1></html>" > /var/www/html/index.html 
-EOF
+data "template_file" "ubu_user_data" {
+  template = file("${path.module}/aws_bootstrap.sh")
+  vars = {
+    name     = "Frontend"
+    password = var.workload_password
+  }
 }
-
 module "my-vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
@@ -85,7 +77,7 @@ module "aws_ubu_1" {
   subnet_id                   = element(module.my-vpc.public_subnets, 0)
   vpc_security_group_ids      = [module.security_group_1.this_security_group_id]
   associate_public_ip_address = true
-  user_data_base64            = base64encode(local.ubu_user_data)
+  user_data_base64            = base64encode(data.template_file.ubu_user_data.rendered)
   providers = {
     aws = aws.west
   }
