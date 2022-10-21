@@ -1,4 +1,4 @@
-resource "tls_private_key" "avtx_key" {
+resource "tls_private_key" "pros_key" {
   algorithm = "RSA"
   rsa_bits  = 2048
 }
@@ -6,7 +6,7 @@ resource "tls_private_key" "avtx_key" {
 resource "aws_key_pair" "aws_west1_key" {
   provider   = aws.west
   key_name   = var.ec2_key_name
-  public_key = tls_private_key.avtx_key.public_key_openssh
+  public_key = tls_private_key.pros_key.public_key_openssh
 }
 
 ##################################################################
@@ -31,13 +31,13 @@ locals {
 #!/bin/bash
 sudo hostnamectl set-hostname "Ubuntu"
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-sudo echo 'ubuntu:Password123!' | /usr/sbin/chpasswd
+sudo echo 'ubuntu:Prosim0123!' | /usr/sbin/chpasswd
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt-get -y install traceroute unzip build-essential git gcc hping3 apache2 net-tools
 sudo apt autoremove
 sudo /etc/init.d/ssh restart
-sudo echo "<html><h1>Aviatrix is awesome</h1></html>" > /var/www/html/index.html 
+sudo echo "<html><h1>Prosimo is awesome</h1></html>" > /var/www/html/index.html 
 EOF
 }
 
@@ -101,7 +101,7 @@ data "aws_network_interface" "aws_ubu_1" {
   provider = aws.west
   id       = module.aws_ubu_1.primary_network_interface_id
 }
-  
+
 # private_ip = data.aws_network_interface.aws_ubu_1.private_ip
 
 output "Private_IP" {
