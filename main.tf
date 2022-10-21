@@ -44,7 +44,7 @@ EOF
 module "my-vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "my-vpc"
+  name = "tf-vpc"
   cidr = "10.222.0.0/16"
 
   azs             = ["eu-west-1a", "eu-west-1b"]
@@ -55,7 +55,7 @@ module "my-vpc" {
   enable_vpn_gateway = false
 
   tags = {
-    Name = "2021-09"
+    Name = "tf-vpc"
   }
   providers = {
     aws = aws.west
@@ -79,7 +79,7 @@ module "security_group_1" {
 module "aws_ubu_1" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
   instance_type               = "t3.micro"
-  name                        = "AWS-ubu"
+  name                        = "tf-ubu"
   ami                         = data.aws_ami.ubuntu.id
   key_name                    = var.ec2_key_name
   subnet_id                   = element(module.my-vpc.public_subnets, 0)
