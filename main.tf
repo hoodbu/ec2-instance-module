@@ -39,7 +39,7 @@ module "my-vpc" {
   name = "tf-vpc"
   cidr = "10.222.0.0/16"
 
-  azs             = ["eu-west-1a", "eu-west-1b"]
+  azs             = ["ca-central-1a", "ca-central-1b"]
   private_subnets = ["10.222.1.0/24"]
   public_subnets  = ["10.222.101.0/24"]
 
