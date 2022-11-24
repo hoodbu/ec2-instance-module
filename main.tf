@@ -3,8 +3,8 @@ resource "tls_private_key" "pros_key" {
   rsa_bits  = 2048
 }
 
-resource "aws_key_pair" "aws_west1_key" {
-  provider   = aws.west
+resource "aws_key_pair" "aws_east1_key" {
+  provider   = aws.east
   key_name   = var.ec2_key_name
   public_key = tls_private_key.pros_key.public_key_openssh
 }
@@ -13,7 +13,7 @@ resource "aws_key_pair" "aws_west1_key" {
 # Data source to get AMI details
 ##################################################################
 data "aws_ami" "ubuntu" {
-  provider    = aws.west
+  provider    = aws.east
   most_recent = true
   filter {
     name   = "name"
@@ -39,7 +39,7 @@ module "my-vpc" {
   name = "tf-vpc"
   cidr = "10.222.0.0/16"
 
-  azs             = ["ca-central-1a", "ca-central-1b"]
+  azs             = ["us-east-1a", "us-east-1b"]
   private_subnets = ["10.222.1.0/24"]
   public_subnets  = ["10.222.101.0/24"]
 
@@ -50,7 +50,7 @@ module "my-vpc" {
     Name = "tf-vpc"
   }
   providers = {
-    aws = aws.west
+    aws = aws.east
   }
 }
 
@@ -64,7 +64,7 @@ module "security_group_1" {
   ingress_rules       = ["http-80-tcp", "ssh-tcp", "all-icmp"]
   egress_rules        = ["all-all"]
   providers = {
-    aws = aws.west
+    aws = aws.east
   }
 }
 
@@ -79,7 +79,7 @@ module "aws_ubu_1" {
   associate_public_ip_address = true
   user_data_base64            = base64encode(data.template_file.ubu_user_data.rendered)
   providers = {
-    aws = aws.west
+    aws = aws.east
   }
 }
 
@@ -90,7 +90,7 @@ output "Public_IP" {
 ### Code below needs to output Private IP.
 
 data "aws_network_interface" "aws_ubu_1" {
-  provider = aws.west
+  provider = aws.east
   id       = module.aws_ubu_1.primary_network_interface_id
 }
 
