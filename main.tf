@@ -94,7 +94,7 @@ data "aws_network_interface" "aws_ubu_1" {
   id       = module.aws_ubu_1.primary_network_interface_id
 }
 
-# private_ip = data.aws_network_interface.aws_ubu_1.private_ip
+## private_ip = data.aws_network_interface.aws_ubu_1.private_ip
 
 output "Private_IP" {
   value = data.aws_network_interface.aws_ubu_1.private_ip
