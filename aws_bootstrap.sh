@@ -8,7 +8,7 @@ sudo apt-get -y install traceroute unzip build-essential git gcc hping3 apache2 
 sudo apt autoremove
 
 sudo /etc/init.d/ssh restart
-sudo echo "<html><h1>Prosimo is awesome</h1></html>" > /var/www/html/index.html 
+sudo echo "<html><h1>Hello world!</h1></html>" > /var/www/html/index.html 
 
 git clone https://github.com/Microsoft/ntttcp-for-linux
 cd ntttcp-for-linux/src
