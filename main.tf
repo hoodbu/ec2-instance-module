@@ -56,7 +56,6 @@ module "tf-vpc" {
 
 module "security_group_1" {
   source              = "terraform-aws-modules/security-group/aws"
-  version             = "~> 3.0"
   name                = "Ubuntu Security Group"
   description         = "Security group for example usage with EC2 instance"
   vpc_id              = module.tf-vpc.vpc_id
