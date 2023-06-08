@@ -3,7 +3,7 @@ resource "tls_private_key" "pros_key" {
   rsa_bits  = 2048
 }
 
-resource "aws_key_pair" "aws_east1_key" {
+resource "aws_key_pair" "aws_west2_key" {
   provider   = aws.west
   key_name   = var.ec2_key_name
   public_key = tls_private_key.pros_key.public_key_openssh
